@@ -90,11 +90,11 @@
     - Add debounced auto-save (1 second)
     - _Requirements: 1.1, 1.4, 7.1, 7.5, 8.1_
 
-  - [-] 5.2 Write property test for code storage
+  - [x] 5.2 Write property test for code storage
     - **Property 1: Code storage persistence**
     - **Validates: Requirements 1.1**
 
-  - [ ]* 5.3 Write property test for auto-save to localStorage
+  - [x] 5.3 Write property test for auto-save to localStorage
     - **Property 22: LocalStorage auto-save**
     - **Validates: Requirements 7.1**
 
