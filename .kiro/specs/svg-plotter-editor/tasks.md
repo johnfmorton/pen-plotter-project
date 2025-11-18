@@ -29,8 +29,8 @@
     - **Property 23: LocalStorage round trip**
     - **Validates: Requirements 7.2**
 
-- [ ] 3. Implement ProjectManager component
-  - [ ] 3.1 Create ProjectManager class
+- [x] 3. Implement ProjectManager component
+  - [x] 3.1 Create ProjectManager class
     - Implement createProject method
     - Implement saveToFile method with JSON serialization
     - Implement loadFromFile method with validation
@@ -38,11 +38,11 @@
     - Implement loadFromLocalStorage method
     - _Requirements: 3.5, 3.7, 4.1, 4.2, 4.4, 4.5, 5.2, 5.3, 7.1, 7.2, 7.4_
 
-  - [ ]* 3.2 Write property test for save-load round trip
+  - [x] 3.2 Write property test for save-load round trip
     - **Property 16: Save-load round trip preserves formatting**
     - **Validates: Requirements 4.5**
 
-  - [ ]* 3.3 Write property test for save completeness
+  - [x] 3.3 Write property test for save completeness
     - **Property 13: Save completeness**
     - **Validates: Requirements 4.2**
 
@@ -54,7 +54,7 @@
     - **Property 19: Invalid file error handling**
     - **Validates: Requirements 5.4**
 
-- [ ] 4. Implement SVGGenerator component
+- [-] 4. Implement SVGGenerator component
   - [ ] 4.1 Create SVGGenerator class
     - Initialize SVG.js instance with viewport dimensions
     - Implement execute method with Function constructor
