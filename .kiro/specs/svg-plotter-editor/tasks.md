@@ -55,7 +55,7 @@
     - **Validates: Requirements 5.4**
 
 - [-] 4. Implement SVGGenerator component
-  - [ ] 4.1 Create SVGGenerator class
+  - [x] 4.1 Create SVGGenerator class
     - Initialize SVG.js instance with viewport dimensions
     - Implement execute method with Function constructor
     - Add timeout protection (5 second limit)
@@ -64,7 +64,7 @@
     - Return generated SVG markup
     - _Requirements: 1.2, 1.3, 1.4, 1.5_
 
-  - [ ]* 4.2 Write property test for SVG.js instance availability
+  - [x] 4.2 Write property test for SVG.js instance availability
     - **Property 2: SVG.js instance availability**
     - **Validates: Requirements 1.2**
 
@@ -80,8 +80,8 @@
     - **Property 5: Runtime error handling**
     - **Validates: Requirements 1.5**
 
-- [ ] 5. Implement CodeEditor component
-  - [ ] 5.1 Create CodeEditor class with Monaco Editor
+- [x] 5. Implement CodeEditor component
+  - [x] 5.1 Create CodeEditor class with Monaco Editor
     - Initialize Monaco Editor instance
     - Configure JavaScript language support
     - Implement getValue and setValue methods
@@ -90,7 +90,7 @@
     - Add debounced auto-save (1 second)
     - _Requirements: 1.1, 1.4, 7.1, 7.5, 8.1_
 
-  - [ ]* 5.2 Write property test for code storage
+  - [-] 5.2 Write property test for code storage
     - **Property 1: Code storage persistence**
     - **Validates: Requirements 1.1**
 
