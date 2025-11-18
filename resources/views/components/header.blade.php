@@ -1,0 +1,1 @@
+<header class="text-center pt-6 text-slate-500 text-sm"">https://github.com/johnfmorton/kiro-laravel-skeleton-template</header>
