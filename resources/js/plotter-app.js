@@ -18,6 +18,7 @@ import { CodeEditor } from './editors/code-editor.js';
 import { PreviewPanel } from './preview/preview-panel.js';
 import { ControlPanel } from './controls/control-panel.js';
 import { NewProjectDialog } from './dialogs/new-project-dialog.js';
+import { ErrorDisplay } from './errors/error-display.js';
 import { VIEWPORT_PRESETS } from './models/project.js';
 import { exportSVG } from './utils/svg-exporter.js';
 
@@ -62,6 +63,7 @@ export class PlotterApp {
         this.previewPanel = null;
         this.controlPanel = null;
         this.newProjectDialog = null;
+        this.errorDisplay = null;
         this.currentProject = null;
         this.viewportDisplay = null;
     }
@@ -76,13 +78,17 @@ export class PlotterApp {
         const codeEditorContainer = document.getElementById('code-editor');
         const previewPanelContainer = document.getElementById('preview-panel');
         const controlPanelContainer = document.getElementById('control-panel');
+        const errorDisplayContainer = document.getElementById('error-display');
         
-        if (!codeEditorContainer || !previewPanelContainer || !controlPanelContainer) {
+        if (!codeEditorContainer || !previewPanelContainer || !controlPanelContainer || !errorDisplayContainer) {
             throw new Error('Required DOM elements not found');
         }
 
         // Initialize viewport display
         this.viewportDisplay = document.getElementById('viewport-display');
+
+        // Initialize ErrorDisplay
+        this.errorDisplay = new ErrorDisplay(errorDisplayContainer);
 
         // Initialize ProjectManager
         this.projectManager = new ProjectManager();
@@ -204,8 +210,9 @@ export class PlotterApp {
         this.codeEditor.setValue(DEFAULT_CODE);
         this.codeEditor.clearErrors();
 
-        // Clear preview
+        // Clear preview and errors
         this.previewPanel.clear();
+        this.errorDisplay.clearError();
 
         // Update viewport display
         this._updateViewportDisplay();
@@ -284,6 +291,9 @@ export class PlotterApp {
                 // Update code editor
                 this.codeEditor.setValue(project.code);
                 this.codeEditor.clearErrors();
+                
+                // Clear any displayed errors
+                this.errorDisplay.clearError();
 
                 // Update viewport display
                 this._updateViewportDisplay();
@@ -318,7 +328,7 @@ export class PlotterApp {
 
         // Clear previous errors
         this.codeEditor.clearErrors();
-        this.previewPanel.clearError();
+        this.errorDisplay.clearError();
 
         try {
             // Execute code and generate SVG
@@ -332,9 +342,8 @@ export class PlotterApp {
         } catch (error) {
             console.error('SVG generation failed:', error);
 
-            // Display error in preview panel (Requirement 2.4)
-            const errorMessage = this._formatErrorMessage(error);
-            this.previewPanel.showError(errorMessage);
+            // Display error using ErrorDisplay component (Requirements 8.1, 8.2, 8.3)
+            this.errorDisplay.showError(error);
 
             // Highlight error in code editor if line number is available
             if (error.line) {
@@ -409,25 +418,7 @@ export class PlotterApp {
         }
     }
 
-    /**
-     * Format error message for display
-     * 
-     * @private
-     * @param {Object} error - Error object from SVGGenerator
-     * @returns {string} Formatted error message
-     */
-    _formatErrorMessage(error) {
-        let message = `${error.type === 'syntax' ? 'Syntax Error' : 'Runtime Error'}: ${error.message}`;
 
-        if (error.line) {
-            message += `\n\nLine ${error.line}`;
-            if (error.column) {
-                message += `, Column ${error.column}`;
-            }
-        }
-
-        return message;
-    }
 
     /**
      * Get the current project
