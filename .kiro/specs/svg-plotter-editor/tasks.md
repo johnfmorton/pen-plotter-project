@@ -125,8 +125,8 @@
     - Style buttons with Tailwind CSS
     - _Requirements: 6.4_
 
-- [ ] 8. Implement new project dialog
-  - [ ] 8.1 Create project creation dialog UI
+- [x] 8. Implement new project dialog
+  - [x] 8.1 Create project creation dialog UI
     - Create modal dialog with project name input
     - Add viewport size radio buttons/dropdown
     - Set default viewport to 8.5x11
@@ -141,8 +141,8 @@
     - **Property 11: Project metadata storage**
     - **Validates: Requirements 3.7**
 
-- [ ] 9. Implement main PlotterApp orchestrator
-  - [ ] 9.1 Create PlotterApp class
+- [x] 9. Implement main PlotterApp orchestrator
+  - [x] 9.1 Create PlotterApp class
     - Initialize all components
     - Wire up event handlers
     - Implement handleNewProject method
@@ -173,8 +173,8 @@
     - **Property 24: File load updates localStorage**
     - **Validates: Requirements 7.4**
 
-- [ ] 10. Implement SVG export functionality
-  - [ ] 10.1 Create SVG export utility
+- [x] 10. Implement SVG export functionality
+  - [x] 10.1 Create SVG export utility
     - Extract SVG markup from preview
     - Add XML declaration and namespaces
     - Set viewBox attribute to match viewport
