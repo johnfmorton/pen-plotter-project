@@ -98,8 +98,8 @@
     - **Property 22: LocalStorage auto-save**
     - **Validates: Requirements 7.1**
 
-- [ ] 6. Implement PreviewPanel component
-  - [ ] 6.1 Create PreviewPanel class
+- [x] 6. Implement PreviewPanel component
+  - [x] 6.1 Create PreviewPanel class
     - Create container for SVG rendering
     - Implement render method to display SVG
     - Implement clear method
@@ -109,11 +109,11 @@
     - Add error display area
     - _Requirements: 2.2, 2.5, 3.6, 8.3_
 
-  - [ ]* 6.2 Write property test for aspect ratio preservation
+  - [x] 6.2 Write property test for aspect ratio preservation
     - **Property 8: Aspect ratio preservation**
     - **Validates: Requirements 2.5**
 
-  - [ ]* 6.3 Write property test for canvas viewport synchronization
+  - [x] 6.3 Write property test for canvas viewport synchronization
     - **Property 10: Canvas viewport synchronization**
     - **Validates: Requirements 3.6**
 
