@@ -14,3 +14,7 @@ Route::get('/example', function () {
 Route::get('/original', function () {
     return view('welcome');
 });
+
+Route::get('/plotter-editor', function () {
+    return view('plotter-editor');
+});
