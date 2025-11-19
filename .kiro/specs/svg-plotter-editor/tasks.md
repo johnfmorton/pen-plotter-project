@@ -312,5 +312,5 @@
     - Add example code comments
     - _Requirements: 3.3, 6.4_
 
-- [ ] 21. Final checkpoint - Ensure all tests pass
+- [x] 21. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
