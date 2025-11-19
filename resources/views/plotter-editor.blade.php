@@ -7,13 +7,13 @@
     <title>SVG Plotter Editor</title>
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/plotter-editor.js'])
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 antialiased">
+<body class="bg-linear-to-br from-gray-50 to-gray-100 antialiased">
     <div id="plotter-app" class="h-screen flex flex-col">
         <!-- Header -->
         <header class="bg-white shadow-md border-b border-gray-200 px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+                    <div class="w-10 h-10 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                         </svg>
@@ -31,9 +31,9 @@
         </header>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex overflow-hidden">
-            <!-- Preview Panel (Left) -->
-            <div class="w-1/2 bg-white border-r border-gray-200 p-6 flex flex-col min-w-0 shadow-inner">
+        <div class="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+            <!-- Preview Panel (Left/Top) -->
+            <div class="w-full md:w-1/2 bg-white md:border-r border-gray-200 p-6 flex flex-col min-w-0 shadow-inner min-h-[50vh] md:min-h-0">
                 <div class="flex items-center gap-2 mb-4">
                     <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -41,7 +41,7 @@
                     </svg>
                     <h2 class="text-lg font-semibold text-gray-700">Preview</h2>
                 </div>
-                <div id="preview-panel" class="flex-1 border-2 border-gray-300 rounded-xl overflow-hidden bg-gradient-to-br from-white to-gray-50 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div id="preview-panel" class="flex-1 border-2 border-gray-300 rounded-xl overflow-hidden bg-linear-to-br from-white to-gray-50 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
                     <!-- SVG will be rendered here -->
                 </div>
                 <div id="error-display" class="mt-4 hidden">
@@ -49,8 +49,8 @@
                 </div>
             </div>
 
-            <!-- Code Panel (Right) -->
-            <div class="w-1/2 bg-white p-6 flex flex-col min-w-0">
+            <!-- Code Panel (Right/Bottom) -->
+            <div class="w-full md:w-1/2 bg-white p-6 flex flex-col min-w-0 min-h-[50vh] md:min-h-0">
                 <div class="flex items-center justify-between mb-4 gap-4">
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,10 +70,10 @@
     </div>
 
     <!-- New Project Dialog (Hidden by default) -->
-    <div id="new-project-dialog" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div id="new-project-dialog" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full transform transition-all">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                <div class="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
                     <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
@@ -122,7 +122,7 @@
                 </button>
                 <button 
                     id="confirm-new-project" 
-                    class="px-6 py-3 text-white font-medium bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                    class="px-6 py-3 text-white font-medium bg-linear-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                     Create Project
                 </button>
