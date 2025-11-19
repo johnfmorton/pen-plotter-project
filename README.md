@@ -2,6 +2,8 @@
 
 A browser-based code editor for creating generative art designed for pen plotters. Write JavaScript code using SVG.js, see your artwork rendered in real-time, and export production-ready SVG files optimized for physical plotting.
 
+![!(Screenshot of Pen Plotter Project](documentation/pen-plotter-screenshot.jpg)
+
 ## About This Project
 
 The SVG Pen Plotter Editor is a complete web application that demonstrates the power and versatility of the [Kiro Laravel Skeleton Template](https://github.com/johnfmorton/kiro-laravel-skeleton). Built entirely using Kiro AI assistance, this project showcases how quickly you can go from concept to working application when you start with a solid foundation.
