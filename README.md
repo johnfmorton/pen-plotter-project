@@ -1,12 +1,35 @@
-# Kiro + Laravel Skeleton Template
+# SVG Pen Plotter Editor
 
-Welcome to the Kiro + Laravel Skeleton Template.
+A browser-based code editor for creating generative art designed for pen plotters. Write JavaScript code using SVG.js, see your artwork rendered in real-time, and export production-ready SVG files optimized for physical plotting.
 
-## Introduction
+## About This Project
 
-This repository is a fully-formed Laravel starter built from the experience of creating a real-world application with Kiro. Kiro provides a strong foundation for beginning any project, but  the steering documents and build-system structure included in this template provide a production-ready workspace to get your project started on the right foot. You don't have to fuss with the toolkit. You just start building.
+The SVG Pen Plotter Editor is a complete web application that demonstrates the power and versatility of the [Kiro Laravel Skeleton Template](https://github.com/johnfmorton/kiro-laravel-skeleton). Built entirely using Kiro AI assistance, this project showcases how quickly you can go from concept to working application when you start with a solid foundation.
 
-You start your project with a complete development environment powered by DDEV, a working Vite setup with hot-module reloading, and a set of guiding documents that help shape conventions, workflows, and team collaboration from day one. Using this template saves at least an hour of initial setup time compared to assembling all of these pieces manually. It provides a consistent, fast, and opinionated starting point so you can focus on building features instead of wiring the project together.
+This application provides a creative coding environment where artists and developers can:
+
+- Write JavaScript code using the powerful SVG.js library
+- Preview artwork in real-time with automatic regeneration
+- Work with physical dimensions (inches) for accurate plotter output
+- Choose from preset viewport sizes (Letter, Landscape, Square, etc.)
+- Save and load projects as JSON files
+- Export production-ready SVG files for pen plotters
+- Enjoy automatic state persistence with localStorage
+- Get helpful error messages with line numbers when code fails
+
+The editor features a split-panel interface with Monaco Editor (the same editor that powers VS Code) for code editing, and a live preview panel that updates as you work. Projects automatically save to localStorage, so you never lose your work between sessions.
+
+## Built with Kiro
+
+This project was developed using the Kiro Laravel Skeleton Template, which provided:
+
+- A complete Laravel 12 setup with DDEV for local development
+- Pre-configured Vite integration with hot module reloading
+- Comprehensive steering documents that guided architectural decisions
+- Best practices for Laravel development baked in from day one
+- A Makefile for simple, no-fuss development workflows
+
+The skeleton template eliminated hours of initial setup and configuration, allowing development to focus immediately on building features. The included steering documents helped maintain consistent code quality, naming conventions, and architectural patterns throughout the project. This is a real-world demonstration of how the Kiro Laravel Skeleton accelerates development while maintaining professional standards.
 
 ## Features
 
