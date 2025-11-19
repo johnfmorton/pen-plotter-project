@@ -257,8 +257,8 @@
     - **Property 31: Export file extension**
     - **Validates: Requirements 9.4**
 
-- [ ] 15. Create Laravel route and Blade template
-  - [ ] 15.1 Set up route and controller
+- [x] 15. Create Laravel route and Blade template
+  - [x] 15.1 Set up route and controller
     - Create route in web.php for /plotter-editor
     - Create PlotterEditorController with index method
     - Create Blade template at resources/views/plotter-editor.blade.php
