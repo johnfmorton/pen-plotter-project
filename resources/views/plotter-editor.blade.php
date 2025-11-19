@@ -22,7 +22,7 @@
         <!-- Main Content Area -->
         <div class="flex-1 flex overflow-hidden">
             <!-- Preview Panel (Left) -->
-            <div class="w-1/2 bg-white border-r border-gray-200 p-6 flex flex-col">
+            <div class="w-1/2 bg-white border-r border-gray-200 p-6 flex flex-col min-w-0">
                 <h2 class="text-lg font-semibold text-gray-700 mb-4">Preview</h2>
                 <div id="preview-panel" class="flex-1 border-2 border-gray-300 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
                     <!-- SVG will be rendered here -->
@@ -33,10 +33,10 @@
             </div>
 
             <!-- Code Panel (Right) -->
-            <div class="w-1/2 bg-white p-6 flex flex-col">
+            <div class="w-1/2 bg-white p-6 flex flex-col min-w-0">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-lg font-semibold text-gray-700">Code Editor</h2>
-                    <div id="control-panel" class="flex gap-2">
+                    <div id="control-panel" class="flex gap-2 flex-wrap">
                         <!-- Control buttons will be added here -->
                     </div>
                 </div>

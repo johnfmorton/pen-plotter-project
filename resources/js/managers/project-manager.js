@@ -11,6 +11,7 @@ import {
     loadProjectFromLocalStorage, 
     clearLocalStorage 
 } from '../utils/local-storage.js';
+import { downloadJSON, readJSONFile } from '../utils/file-utils.js';
 
 /**
  * ProjectManager class handles all project-related operations
@@ -50,25 +51,8 @@ export class ProjectManager {
             // Update the updatedAt timestamp
             const updatedProject = touchProject(project);
             
-            // Serialize project to JSON with formatting
-            const projectJson = JSON.stringify(updatedProject, null, 2);
-            
-            // Create a Blob from the JSON data
-            const blob = new Blob([projectJson], { type: 'application/json' });
-            
-            // Create a download link
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${project.name}.json`;
-            
-            // Trigger download
-            document.body.appendChild(link);
-            link.click();
-            
-            // Cleanup
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            // Use the file utility to download JSON
+            downloadJSON(updatedProject, project.name);
         } catch (error) {
             throw new Error(`Failed to save project to file: ${error.message}`);
         }
@@ -86,21 +70,9 @@ export class ProjectManager {
             throw new Error('No file provided');
         }
 
-        if (!file.name.endsWith('.json')) {
-            throw new Error('Invalid file type: expected .json file');
-        }
-
         try {
-            // Read file as text
-            const text = await this.readFileAsText(file);
-            
-            // Parse JSON
-            let project;
-            try {
-                project = JSON.parse(text);
-            } catch (parseError) {
-                throw new Error('Invalid JSON format: unable to parse file');
-            }
+            // Use the file utility to read JSON
+            const project = await readJSONFile(file);
             
             // Validate project structure
             if (!isValidProject(project)) {
@@ -115,29 +87,6 @@ export class ProjectManager {
             }
             throw new Error(`Failed to load project from file: ${error.message}`);
         }
-    }
-
-    /**
-     * Helper method to read a file as text
-     * 
-     * @param {File} file - File to read
-     * @returns {Promise<string>} File contents as text
-     * @private
-     */
-    readFileAsText(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            
-            reader.onload = (event) => {
-                resolve(event.target.result);
-            };
-            
-            reader.onerror = () => {
-                reject(new Error('Failed to read file'));
-            };
-            
-            reader.readAsText(file);
-        });
     }
 
     /**
