@@ -32,27 +32,11 @@ export class PreviewPanel {
         
         // Create SVG container
         this.svgContainer = document.createElement('div');
-        this.svgContainer.className = 'preview-svg-container';
-        this.svgContainer.style.width = '100%';
-        this.svgContainer.style.height = '100%';
-        this.svgContainer.style.display = 'flex';
-        this.svgContainer.style.alignItems = 'center';
-        this.svgContainer.style.justifyContent = 'center';
-        this.svgContainer.style.overflow = 'auto';
+        this.svgContainer.className = 'preview-svg-container w-full h-full flex items-center justify-center overflow-auto';
         
         // Create error display area
         this.errorContainer = document.createElement('div');
-        this.errorContainer.className = 'preview-error-container';
-        this.errorContainer.style.display = 'none';
-        this.errorContainer.style.padding = '1rem';
-        this.errorContainer.style.margin = '1rem';
-        this.errorContainer.style.backgroundColor = '#fee';
-        this.errorContainer.style.border = '1px solid #fcc';
-        this.errorContainer.style.borderRadius = '0.25rem';
-        this.errorContainer.style.color = '#c00';
-        this.errorContainer.style.fontFamily = 'monospace';
-        this.errorContainer.style.whiteSpace = 'pre-wrap';
-        this.errorContainer.style.wordBreak = 'break-word';
+        this.errorContainer.className = 'preview-error-container hidden p-4 m-4 bg-red-50 border border-red-300 rounded-lg text-red-800 font-mono whitespace-pre-wrap break-words';
         
         // Add both to container
         this.container.appendChild(this.svgContainer);
@@ -161,7 +145,8 @@ export class PreviewPanel {
      */
     showError(message) {
         this.errorContainer.textContent = message;
-        this.errorContainer.style.display = 'block';
+        this.errorContainer.classList.remove('hidden');
+        this.errorContainer.classList.add('block');
     }
 
     /**
@@ -169,7 +154,8 @@ export class PreviewPanel {
      */
     clearError() {
         this.errorContainer.textContent = '';
-        this.errorContainer.style.display = 'none';
+        this.errorContainer.classList.add('hidden');
+        this.errorContainer.classList.remove('block');
     }
 
     /**

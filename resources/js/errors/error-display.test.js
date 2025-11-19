@@ -127,7 +127,7 @@ describe('ErrorDisplay', () => {
             errorDisplay.showError('Test error');
             
             expect(container.classList.contains('hidden')).toBe(false);
-            expect(container.style.display).toBe('block');
+            expect(container.classList.contains('block')).toBe(true);
         });
 
         it('should replace previous error when showing new error', () => {
@@ -147,7 +147,7 @@ describe('ErrorDisplay', () => {
             
             errorDisplay.clearError();
             expect(container.classList.contains('hidden')).toBe(true);
-            expect(container.style.display).toBe('none');
+            expect(container.classList.contains('block')).toBe(false);
         });
 
         it('should clear error content', () => {

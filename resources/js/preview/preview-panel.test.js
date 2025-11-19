@@ -46,7 +46,7 @@ describe('PreviewPanel', () => {
 
         it('should hide error container by default', () => {
             const errorContainer = container.querySelector('.preview-error-container');
-            expect(errorContainer.style.display).toBe('none');
+            expect(errorContainer.classList.contains('hidden')).toBe(true);
         });
     });
 
@@ -75,12 +75,12 @@ describe('PreviewPanel', () => {
 
         it('should clear errors when rendering', () => {
             previewPanel.showError('Test error');
-            expect(previewPanel.errorContainer.style.display).toBe('block');
+            expect(previewPanel.errorContainer.classList.contains('block')).toBe(true);
 
             const svgContent = '<svg width="100" height="100"><circle cx="50" cy="50" r="40" /></svg>';
             previewPanel.render(svgContent);
 
-            expect(previewPanel.errorContainer.style.display).toBe('none');
+            expect(previewPanel.errorContainer.classList.contains('hidden')).toBe(true);
         });
 
         it('should show error for invalid SVG content', () => {
@@ -88,7 +88,7 @@ describe('PreviewPanel', () => {
             
             previewPanel.render(invalidContent);
 
-            expect(previewPanel.errorContainer.style.display).toBe('block');
+            expect(previewPanel.errorContainer.classList.contains('block')).toBe(true);
             expect(previewPanel.errorContainer.textContent).toContain('Invalid SVG content');
         });
 
@@ -117,11 +117,11 @@ describe('PreviewPanel', () => {
 
         it('should clear error messages', () => {
             previewPanel.showError('Test error');
-            expect(previewPanel.errorContainer.style.display).toBe('block');
+            expect(previewPanel.errorContainer.classList.contains('block')).toBe(true);
 
             previewPanel.clear();
 
-            expect(previewPanel.errorContainer.style.display).toBe('none');
+            expect(previewPanel.errorContainer.classList.contains('hidden')).toBe(true);
             expect(previewPanel.errorContainer.textContent).toBe('');
         });
     });
@@ -159,7 +159,7 @@ describe('PreviewPanel', () => {
             
             previewPanel.showError(errorMessage);
 
-            expect(previewPanel.errorContainer.style.display).toBe('block');
+            expect(previewPanel.errorContainer.classList.contains('block')).toBe(true);
             expect(previewPanel.errorContainer.textContent).toBe(errorMessage);
         });
 
@@ -174,11 +174,11 @@ describe('PreviewPanel', () => {
     describe('clearError', () => {
         it('should hide error container', () => {
             previewPanel.showError('Test error');
-            expect(previewPanel.errorContainer.style.display).toBe('block');
+            expect(previewPanel.errorContainer.classList.contains('block')).toBe(true);
 
             previewPanel.clearError();
 
-            expect(previewPanel.errorContainer.style.display).toBe('none');
+            expect(previewPanel.errorContainer.classList.contains('hidden')).toBe(true);
         });
 
         it('should clear error text', () => {

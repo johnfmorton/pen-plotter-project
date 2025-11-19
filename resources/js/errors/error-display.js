@@ -27,43 +27,14 @@ export class ErrorDisplay {
      * @private
      */
     _initializeContainer() {
-        // Set up base container styles
-        this.container.className = 'error-display hidden';
+        // Set up base container styles with Tailwind classes
+        this.container.className = 'error-display hidden p-4 mt-4 font-mono text-sm leading-relaxed';
         
         // Create inner content container
         this.contentContainer = document.createElement('div');
-        this.contentContainer.className = 'error-content';
+        this.contentContainer.className = 'error-content whitespace-pre-wrap break-words';
         
         this.container.appendChild(this.contentContainer);
-        
-        // Apply default styles
-        this._applyStyles();
-    }
-
-    /**
-     * Apply styling to the error display
-     * 
-     * @private
-     */
-    _applyStyles() {
-        // Container styles
-        Object.assign(this.container.style, {
-            padding: '1rem',
-            marginTop: '1rem',
-            backgroundColor: '#fee',
-            border: '2px solid #fcc',
-            borderRadius: '0.5rem',
-            fontFamily: 'monospace',
-            fontSize: '0.875rem',
-            lineHeight: '1.5'
-        });
-        
-        // Content container styles
-        Object.assign(this.contentContainer.style, {
-            color: '#c00',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word'
-        });
     }
 
     /**
@@ -109,38 +80,32 @@ export class ErrorDisplay {
         
         // Create error type header
         const typeHeader = document.createElement('div');
-        typeHeader.style.fontWeight = 'bold';
-        typeHeader.style.marginBottom = '0.5rem';
-        typeHeader.style.fontSize = '1rem';
+        typeHeader.className = 'font-bold mb-2 text-base';
         
         // Set header text based on error type (Requirement 8.2)
         if (type === 'syntax') {
             typeHeader.textContent = '⚠️ Syntax Error';
-            typeHeader.style.color = '#d00';
+            typeHeader.className += ' text-red-700';
         } else if (type === 'runtime') {
             typeHeader.textContent = '❌ Runtime Error';
-            typeHeader.style.color = '#c00';
+            typeHeader.className += ' text-red-800';
         } else {
             typeHeader.textContent = '⚠️ Error';
-            typeHeader.style.color = '#c00';
+            typeHeader.className += ' text-red-800';
         }
         
         this.contentContainer.appendChild(typeHeader);
         
         // Create message container
         const messageContainer = document.createElement('div');
-        messageContainer.style.marginBottom = '0.5rem';
+        messageContainer.className = 'mb-2 text-red-900';
         messageContainer.textContent = message;
         this.contentContainer.appendChild(messageContainer);
         
         // Add line number information if available (Requirement 8.1)
         if (line !== null) {
             const locationContainer = document.createElement('div');
-            locationContainer.style.marginTop = '0.75rem';
-            locationContainer.style.paddingTop = '0.75rem';
-            locationContainer.style.borderTop = '1px solid #fcc';
-            locationContainer.style.fontWeight = 'bold';
-            locationContainer.style.color = '#900';
+            locationContainer.className = 'mt-3 pt-3 border-t border-red-300 font-bold text-red-900';
             
             let locationText = `📍 Line ${line}`;
             if (column !== null) {
@@ -153,7 +118,7 @@ export class ErrorDisplay {
         
         // Show the container (Requirement 8.3)
         this.container.classList.remove('hidden');
-        this.container.style.display = 'block';
+        this.container.classList.add('block');
     }
 
     /**
@@ -164,7 +129,7 @@ export class ErrorDisplay {
     clearError() {
         this.contentContainer.innerHTML = '';
         this.container.classList.add('hidden');
-        this.container.style.display = 'none';
+        this.container.classList.remove('block');
     }
 
     /**
