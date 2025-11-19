@@ -69,6 +69,46 @@
         </div>
     </div>
 
+    <!-- Save Dialog (Hidden by default) -->
+    <div id="save-dialog" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full transform transition-all">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Save Project</h3>
+            </div>
+            
+            <div class="mb-8">
+                <label for="save-filename" class="block text-sm font-semibold text-gray-700 mb-2">Filename</label>
+                <input 
+                    type="text" 
+                    id="save-filename" 
+                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400" 
+                    placeholder="my-project"
+                >
+                <p class="mt-2 text-sm text-gray-500">File will be saved as <span class="font-mono font-semibold">.json</span></p>
+            </div>
+            
+            <div class="flex gap-3 justify-end">
+                <button 
+                    id="cancel-save" 
+                    class="px-6 py-3 text-gray-700 font-medium bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow"
+                >
+                    Cancel
+                </button>
+                <button 
+                    id="confirm-save" 
+                    class="px-6 py-3 text-white font-medium bg-linear-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- New Project Dialog (Hidden by default) -->
     <div id="new-project-dialog" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full transform transition-all">

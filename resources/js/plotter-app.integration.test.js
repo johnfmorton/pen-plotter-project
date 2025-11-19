@@ -28,6 +28,11 @@ describe('PlotterApp Integration Tests', () => {
                 </div>
                 <div id="error-display"></div>
                 <div id="viewport-display"></div>
+                <div id="save-dialog" class="hidden">
+                    <input id="save-filename" type="text" />
+                    <button id="confirm-save">Save</button>
+                    <button id="cancel-save">Cancel</button>
+                </div>
                 <div id="new-project-dialog" class="hidden">
                     <input id="project-name" />
                     <input type="radio" name="viewport" value="8.5x11" checked />
@@ -93,10 +98,11 @@ describe('PlotterApp Integration Tests', () => {
             const previewPanel = document.getElementById('preview-panel');
             expect(previewPanel.innerHTML).toBeTruthy();
 
-            // Step 4: Save project using app's method
+            // Step 4: Save project using app's method (with Alt key for direct save)
             // Mock the file download
             const createElementSpy = vi.spyOn(document, 'createElement');
-            app.handleSave();
+            const altKeyEvent = new MouseEvent('click', { altKey: true });
+            app.handleSave(altKeyEvent);
 
             // Verify save was attempted
             expect(createElementSpy).toHaveBeenCalled();

@@ -56,7 +56,7 @@ export class ControlPanel {
             },
             { 
                 id: 'save', 
-                label: 'Save', 
+                label: 'Save as', 
                 icon: '💾', 
                 primary: false,
                 tooltip: 'Save current project to a JSON file'
@@ -92,6 +92,9 @@ export class ControlPanel {
         });
 
         this.container.appendChild(buttonContainer);
+        
+        // Set up modifier key listener for save button
+        this._setupSaveButtonModifier();
     }
 
     /**
@@ -173,9 +176,9 @@ export class ControlPanel {
         button.appendChild(labelSpan);
 
         // Add click event listener
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (event) => {
             if (!button.disabled) {
-                this._triggerCallbacks(config.id);
+                this._triggerCallbacks(config.id, event);
             }
         });
 
@@ -261,8 +264,9 @@ export class ControlPanel {
      * 
      * @private
      * @param {string} buttonId - Button identifier
+     * @param {MouseEvent} [event] - Click event (optional)
      */
-    _triggerCallbacks(buttonId) {
+    _triggerCallbacks(buttonId, event) {
         const callbacks = this.callbacks[buttonId];
         if (!callbacks) {
             return;
@@ -270,10 +274,42 @@ export class ControlPanel {
 
         callbacks.forEach(callback => {
             try {
-                callback();
+                callback(event);
             } catch (error) {
                 console.error(`Error in ${buttonId} callback:`, error);
             }
+        });
+    }
+
+    /**
+     * Set up modifier key listener for save button to change text
+     * 
+     * @private
+     */
+    _setupSaveButtonModifier() {
+        const saveButton = this.buttons.save;
+        if (!saveButton) return;
+
+        const labelSpan = saveButton.querySelector('span:last-child');
+        if (!labelSpan) return;
+
+        // Listen for keydown/keyup to detect Alt/Option key
+        const updateButtonText = (event) => {
+            // Check for Alt key (Option on Mac)
+            if (event.altKey) {
+                labelSpan.textContent = 'Save';
+            } else {
+                labelSpan.textContent = 'Save as';
+            }
+        };
+
+        // Update on keydown and keyup
+        document.addEventListener('keydown', updateButtonText);
+        document.addEventListener('keyup', updateButtonText);
+        
+        // Reset when window loses focus
+        window.addEventListener('blur', () => {
+            labelSpan.textContent = 'Save as';
         });
     }
 

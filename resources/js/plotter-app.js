@@ -18,6 +18,7 @@ import { CodeEditor } from './editors/code-editor.js';
 import { PreviewPanel } from './preview/preview-panel.js';
 import { ControlPanel } from './controls/control-panel.js';
 import { NewProjectDialog } from './dialogs/new-project-dialog.js';
+import { SaveDialog } from './dialogs/save-dialog.js';
 import { ErrorDisplay } from './errors/error-display.js';
 import { VIEWPORT_PRESETS } from './models/project.js';
 import { exportSVG } from './utils/svg-exporter.js';
@@ -114,6 +115,7 @@ export class PlotterApp {
         this.previewPanel = null;
         this.controlPanel = null;
         this.newProjectDialog = null;
+        this.saveDialog = null;
         this.errorDisplay = null;
         this.currentProject = null;
         this.viewportDisplay = null;
@@ -178,6 +180,9 @@ export class PlotterApp {
         // Initialize NewProjectDialog
         this.newProjectDialog = new NewProjectDialog();
 
+        // Initialize SaveDialog
+        this.saveDialog = new SaveDialog();
+
         // Wire up event handlers
         this._wireEventHandlers();
 
@@ -198,7 +203,7 @@ export class PlotterApp {
     _wireEventHandlers() {
         // Control Panel button handlers
         this.controlPanel.onNewProject(() => this.handleNewProject());
-        this.controlPanel.onSave(() => this.handleSave());
+        this.controlPanel.onSave((event) => this.handleSave(event));
         this.controlPanel.onOpen(() => this.handleOpen());
         this.controlPanel.onRegenerate(() => this.handleRegenerate());
         this.controlPanel.onExport(() => this.handleExport());
@@ -211,6 +216,11 @@ export class PlotterApp {
         // New Project Dialog handlers
         this.newProjectDialog.onConfirm((projectData) => {
             this._handleNewProjectConfirm(projectData);
+        });
+
+        // Save Dialog handlers
+        this.saveDialog.onConfirm((filename) => {
+            this._handleSaveConfirm(filename);
         });
     }
 
@@ -277,12 +287,41 @@ export class PlotterApp {
 
     /**
      * Handle Save button click
-     * Saves the current project to a JSON file and triggers download
+     * Shows save dialog by default, or saves directly if Alt/Option key is held
      * 
      * Requirements: 4.1, 4.3
      */
-    handleSave() {
-        console.log('Saving project to file');
+    handleSave(event) {
+        console.log('Save button clicked');
+
+        // Check if Alt/Option key is held (for direct save)
+        if (event && event.altKey) {
+            this._saveDirectly();
+        } else {
+            this._showSaveDialog();
+        }
+    }
+
+    /**
+     * Show the save dialog with current project name
+     * 
+     * @private
+     */
+    _showSaveDialog() {
+        console.log('Opening save dialog');
+        
+        // Get current project name without extension
+        const defaultFilename = this.currentProject.name.replace(/\.json$/i, '');
+        this.saveDialog.show(defaultFilename);
+    }
+
+    /**
+     * Save directly without showing dialog (Alt/Option key behavior)
+     * 
+     * @private
+     */
+    _saveDirectly() {
+        console.log('Saving project directly to file');
 
         try {
             // Update current project with latest code
@@ -290,6 +329,35 @@ export class PlotterApp {
 
             // Save to file (triggers download)
             this.projectManager.saveToFile(this.currentProject);
+
+            console.log('Project saved successfully');
+        } catch (error) {
+            console.error('Failed to save project:', error);
+            alert(`Failed to save project: ${error.message}`);
+        }
+    }
+
+    /**
+     * Handle save dialog confirmation
+     * 
+     * @private
+     * @param {string} filename - Filename from dialog
+     */
+    _handleSaveConfirm(filename) {
+        console.log('Saving project with filename:', filename);
+
+        try {
+            // Update current project with latest code
+            this.currentProject.code = this.codeEditor.getValue();
+            
+            // Update project name
+            this.currentProject.name = filename;
+
+            // Save to file (triggers download)
+            this.projectManager.saveToFile(this.currentProject);
+
+            // Save to localStorage with updated name
+            this.projectManager.saveToLocalStorage(this.currentProject);
 
             console.log('Project saved successfully');
         } catch (error) {

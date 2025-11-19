@@ -54,7 +54,7 @@ describe('ControlPanel', () => {
             const exportBtn = controlPanel.getButton('export');
 
             expect(newProjectBtn.textContent).toContain('New Project');
-            expect(saveBtn.textContent).toContain('Save');
+            expect(saveBtn.textContent).toContain('Save as');
             expect(openBtn.textContent).toContain('Open');
             expect(regenerateBtn.textContent).toContain('Regenerate');
             expect(exportBtn.textContent).toContain('Export SVG');
@@ -177,6 +177,29 @@ describe('ControlPanel', () => {
             
             expect(callback1).toHaveBeenCalledTimes(1);
             expect(callback2).toHaveBeenCalledTimes(1);
+        });
+
+        it('should pass click event to callback', () => {
+            const callback = vi.fn();
+            controlPanel.onSave(callback);
+            
+            const button = controlPanel.getButton('save');
+            button.click();
+            
+            expect(callback).toHaveBeenCalledTimes(1);
+            expect(callback.mock.calls[0][0]).toBeInstanceOf(MouseEvent);
+        });
+
+        it('should pass event with altKey property to callback', () => {
+            const callback = vi.fn();
+            controlPanel.onSave(callback);
+            
+            const button = controlPanel.getButton('save');
+            const event = new MouseEvent('click', { altKey: true });
+            button.dispatchEvent(event);
+            
+            expect(callback).toHaveBeenCalledTimes(1);
+            expect(callback.mock.calls[0][0].altKey).toBe(true);
         });
 
         it('should not trigger callback when button is disabled', () => {
@@ -311,6 +334,53 @@ describe('ControlPanel', () => {
             expect(consoleErrorSpy).toHaveBeenCalled();
             
             consoleErrorSpy.mockRestore();
+        });
+    });
+
+    describe('Save Button Modifier Key Behavior', () => {
+        beforeEach(() => {
+            controlPanel = new ControlPanel(container);
+        });
+
+        it('should change save button text to "Save" when Alt key is pressed', () => {
+            const saveBtn = controlPanel.getButton('save');
+            const labelSpan = saveBtn.querySelector('span:last-child');
+            
+            expect(labelSpan.textContent).toBe('Save as');
+            
+            const event = new KeyboardEvent('keydown', { altKey: true });
+            document.dispatchEvent(event);
+            
+            expect(labelSpan.textContent).toBe('Save');
+        });
+
+        it('should change save button text back to "Save as" when Alt key is released', () => {
+            const saveBtn = controlPanel.getButton('save');
+            const labelSpan = saveBtn.querySelector('span:last-child');
+            
+            // Press Alt
+            const keydownEvent = new KeyboardEvent('keydown', { altKey: true });
+            document.dispatchEvent(keydownEvent);
+            expect(labelSpan.textContent).toBe('Save');
+            
+            // Release Alt
+            const keyupEvent = new KeyboardEvent('keyup', { altKey: false });
+            document.dispatchEvent(keyupEvent);
+            expect(labelSpan.textContent).toBe('Save as');
+        });
+
+        it('should reset save button text to "Save as" when window loses focus', () => {
+            const saveBtn = controlPanel.getButton('save');
+            const labelSpan = saveBtn.querySelector('span:last-child');
+            
+            // Press Alt
+            const keydownEvent = new KeyboardEvent('keydown', { altKey: true });
+            document.dispatchEvent(keydownEvent);
+            expect(labelSpan.textContent).toBe('Save');
+            
+            // Window loses focus
+            window.dispatchEvent(new Event('blur'));
+            expect(labelSpan.textContent).toBe('Save as');
         });
     });
 });
