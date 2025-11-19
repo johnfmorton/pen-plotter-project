@@ -5,6 +5,52 @@ import { SVG } from '@svgdotjs/svg.js';
  * 
  * Executes user code in a controlled context and generates SVG using SVG.js.
  * Provides sandboxed code execution with timeout protection and error handling.
+ * 
+ * SVG.js Usage Patterns:
+ * 
+ * The user's code receives a 'draw' object which is an SVG.js drawing instance.
+ * This instance is pre-configured with the correct viewport dimensions.
+ * 
+ * Common SVG.js patterns available to users:
+ * 
+ * Basic Shapes:
+ * - draw.circle(radius).center(x, y)
+ * - draw.rect(width, height).move(x, y)
+ * - draw.ellipse(width, height).center(x, y)
+ * - draw.line(x1, y1, x2, y2)
+ * - draw.polygon([[x1,y1], [x2,y2], ...])
+ * - draw.polyline([[x1,y1], [x2,y2], ...])
+ * 
+ * Paths:
+ * - draw.path('M 0 0 L 100 100')
+ * - draw.path().M(0, 0).L(100, 100)
+ * 
+ * Styling:
+ * - .fill('color') or .fill('none')
+ * - .stroke({ width: 0.02, color: '#000' })
+ * - .opacity(0.5)
+ * 
+ * Transformations:
+ * - .rotate(degrees)
+ * - .scale(factor)
+ * - .translate(x, y)
+ * 
+ * Grouping:
+ * - const group = draw.group()
+ * - group.circle(10).center(0, 0)
+ * 
+ * Viewport Access:
+ * - draw.viewbox() returns { width, height, x, y }
+ * 
+ * @example
+ * // User code example:
+ * const centerX = draw.viewbox().width / 2;
+ * const centerY = draw.viewbox().height / 2;
+ * 
+ * draw.circle(1)
+ *   .center(centerX, centerY)
+ *   .fill('none')
+ *   .stroke({ width: 0.02, color: '#000' });
  */
 export class SVGGenerator {
     /**

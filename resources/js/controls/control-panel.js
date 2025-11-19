@@ -45,13 +45,43 @@ export class ControlPanel {
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'flex flex-wrap gap-2 p-4';
 
-        // Define buttons with their properties
+        // Define buttons with their properties and tooltips
         const buttonConfigs = [
-            { id: 'newProject', label: 'New Project', icon: '📄', primary: false },
-            { id: 'save', label: 'Save', icon: '💾', primary: false },
-            { id: 'open', label: 'Open', icon: '📂', primary: false },
-            { id: 'regenerate', label: 'Regenerate', icon: '🔄', primary: true },
-            { id: 'export', label: 'Export SVG', icon: '📥', primary: false }
+            { 
+                id: 'newProject', 
+                label: 'New Project', 
+                icon: '📄', 
+                primary: false,
+                tooltip: 'Create a new project with custom name and viewport size'
+            },
+            { 
+                id: 'save', 
+                label: 'Save', 
+                icon: '💾', 
+                primary: false,
+                tooltip: 'Save current project to a JSON file'
+            },
+            { 
+                id: 'open', 
+                label: 'Open', 
+                icon: '📂', 
+                primary: false,
+                tooltip: 'Open a previously saved project file'
+            },
+            { 
+                id: 'regenerate', 
+                label: 'Regenerate', 
+                icon: '🔄', 
+                primary: true,
+                tooltip: 'Execute code and update the preview (Ctrl+Enter)'
+            },
+            { 
+                id: 'export', 
+                label: 'Export SVG', 
+                icon: '📥', 
+                primary: false,
+                tooltip: 'Export the generated SVG for use with pen plotter software'
+            }
         ];
 
         // Create each button
@@ -73,12 +103,18 @@ export class ControlPanel {
      * @param {string} config.label - Button label text
      * @param {string} config.icon - Button icon (emoji)
      * @param {boolean} config.primary - Whether this is a primary button
+     * @param {string} [config.tooltip] - Tooltip text for the button
      * @returns {HTMLButtonElement} The created button element
      */
     _createButton(config) {
         const button = document.createElement('button');
         button.type = 'button';
         button.dataset.action = config.id;
+        
+        // Add tooltip if provided
+        if (config.tooltip) {
+            button.title = config.tooltip;
+        }
 
         // Base classes for all buttons
         const baseClasses = [

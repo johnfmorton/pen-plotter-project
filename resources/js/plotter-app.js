@@ -23,33 +23,84 @@ import { VIEWPORT_PRESETS } from './models/project.js';
 import { exportSVG } from './utils/svg-exporter.js';
 
 /**
- * Default starter code for new projects
+ * Default starter code for new projects with comprehensive comments
+ * to help users understand SVG.js usage patterns
  */
-const DEFAULT_CODE = `// Welcome to SVG Plotter Editor!
-// Use the 'draw' object to create SVG graphics with SVG.js
-// Documentation: https://svgjs.dev/
+const DEFAULT_CODE = `// ═══════════════════════════════════════════════════════════════
+// Welcome to SVG Plotter Editor!
+// ═══════════════════════════════════════════════════════════════
+//
+// The 'draw' object is an SVG.js drawing instance pre-configured
+// with your selected viewport dimensions.
+//
+// 📚 SVG.js Documentation: https://svgjs.dev/
+//
+// ═══════════════════════════════════════════════════════════════
 
-// Example: Draw a simple circle pattern
+// ───────────────────────────────────────────────────────────────
+// 1. Get viewport dimensions
+// ───────────────────────────────────────────────────────────────
+// The viewbox() method returns the canvas dimensions in inches
 const centerX = draw.viewbox().width / 2;
 const centerY = draw.viewbox().height / 2;
-const radius = 1;
 
-for (let i = 0; i < 12; i++) {
-  const angle = (i * 30) * Math.PI / 180;
-  const x = centerX + Math.cos(angle) * 2;
-  const y = centerY + Math.sin(angle) * 2;
+// ───────────────────────────────────────────────────────────────
+// 2. Define drawing parameters
+// ───────────────────────────────────────────────────────────────
+const radius = 1;        // Circle radius in inches
+const orbitRadius = 2;   // Distance from center in inches
+const numCircles = 12;   // Number of circles in the pattern
+
+// ───────────────────────────────────────────────────────────────
+// 3. Draw a circular pattern
+// ───────────────────────────────────────────────────────────────
+// Loop to create circles arranged in a circle
+for (let i = 0; i < numCircles; i++) {
+  // Calculate angle for this circle (in radians)
+  const angle = (i * (360 / numCircles)) * Math.PI / 180;
   
+  // Calculate position using polar coordinates
+  const x = centerX + Math.cos(angle) * orbitRadius;
+  const y = centerY + Math.sin(angle) * orbitRadius;
+  
+  // Create a circle at the calculated position
   draw.circle(radius)
-    .center(x, y)
-    .fill('none')
-    .stroke({ width: 0.02, color: '#000' });
+    .center(x, y)           // Position the circle
+    .fill('none')           // No fill (transparent)
+    .stroke({               // Stroke styling
+      width: 0.02,          // Line width in inches
+      color: '#000'         // Black color
+    });
 }
 
-// Add a center circle
+// ───────────────────────────────────────────────────────────────
+// 4. Add a center circle
+// ───────────────────────────────────────────────────────────────
 draw.circle(radius * 1.5)
   .center(centerX, centerY)
   .fill('none')
   .stroke({ width: 0.02, color: '#000' });
+
+// ═══════════════════════════════════════════════════════════════
+// 💡 Tips for creating plotter art:
+// ═══════════════════════════════════════════════════════════════
+//
+// • Use .fill('none') for pen plotters (they draw outlines only)
+// • Keep stroke widths small (0.01 - 0.05 inches work well)
+// • Dimensions are in inches to match your viewport size
+// • Use draw.group() to organize complex drawings
+// • Try draw.rect(), draw.line(), draw.polygon() for variety
+// • Use transformations: .rotate(), .scale(), .translate()
+//
+// 🎨 Common Shapes:
+//   draw.circle(radius).center(x, y)
+//   draw.rect(width, height).move(x, y)
+//   draw.line(x1, y1, x2, y2)
+//   draw.polygon([[x1,y1], [x2,y2], [x3,y3]])
+//   draw.path('M 0 0 L 10 10')
+//
+// 🔄 Click "Regenerate" to see your changes!
+// ═══════════════════════════════════════════════════════════════
 `;
 
 /**
