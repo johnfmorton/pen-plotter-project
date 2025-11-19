@@ -62,7 +62,7 @@
                         <!-- Control buttons will be added here -->
                     </div>
                 </div>
-                <div id="code-editor" class="flex-1 border-2 border-gray-300 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div id="code-editor" class="flex-1 border-2 border-gray-300 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 min-h-64 md:min-h-a">
                     <!-- Monaco Editor will be mounted here -->
                 </div>
             </div>
