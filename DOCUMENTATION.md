@@ -2,12 +2,22 @@
 
 ## Overview
 
-The SVG Pen Plotter Editor is a browser-based creative coding environment for generating artwork designed for pen plotters. Write JavaScript code using SVG.js, preview your artwork in real-time, and export production-ready SVG files optimized for physical plotting.
+The SVG Pen Plotter Editor is a browser-based creative coding environment for generating artwork designed for pen plotters. Built on the **Kiro Laravel Skeleton Template**, this application leverages Laravel 12, DDEV, and modern frontend tooling to provide a robust development foundation.
+
+Write JavaScript code using SVG.js, preview your artwork in real-time, and export production-ready SVG files optimized for physical plotting.
 
 ## Getting Started
 
 ### Prerequisites
 
+This project is built on the **Kiro Laravel Skeleton Template**, which provides:
+- Laravel 12 framework
+- PHP 8.4 via DDEV
+- MySQL 8.4 database
+- Vite 7 for asset bundling
+- Tailwind CSS 4
+
+**Required software:**
 - Docker (for DDEV)
 - DDEV installed ([installation guide](https://ddev.com/get-started/))
 - Git
@@ -348,12 +358,30 @@ ddev poweroff
 3. **Use groups** - Organize related shapes together
 4. **Clear unused code** - Keep editor clean
 
+## Project Architecture
+
+This application is built on the **Kiro Laravel Skeleton Template**, which provides:
+
+- **Backend**: Laravel 12 with PHP 8.4
+- **Frontend**: Vite 7 + Tailwind CSS 4
+- **Database**: SQLite (default) or MySQL 8.4 via DDEV
+- **Development**: DDEV containerized environment
+- **Testing**: PHPUnit 11.5+ for backend tests
+- **Code Quality**: Laravel Pint for PSR-12 compliance
+
+The template follows Laravel best practices including:
+- Service layer pattern for business logic
+- Repository pattern for data access
+- Dependency injection for testability
+- Blade components for reusable UI
+
 ## Resources
 
 - [SVG.js Documentation](https://svgjs.dev/)
 - [DDEV Documentation](https://ddev.readthedocs.io/)
 - [Laravel Documentation](https://laravel.com/docs)
 - [Vite Documentation](https://vitejs.dev/)
+- [Kiro Laravel Skeleton Template](https://github.com/kiro-ai/laravel-skeleton)
 
 ## Support
 
