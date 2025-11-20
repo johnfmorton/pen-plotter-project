@@ -396,3 +396,7 @@ For issues or questions:
 ## License
 
 This project is open source under the MIT License.
+
+## Acknowledgments
+
+Built with the [Kiro Laravel Skeleton Template](https://github.com/johnfmorton/kiro-laravel-skeleton), which provides a production-ready foundation for Laravel projects with DDEV, comprehensive steering documents, and best practices built-in.
