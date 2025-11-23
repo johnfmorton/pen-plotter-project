@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>SVG Plotter Editor</title>
+    <title>{{ config('app.name', 'Kiro Laravel Skeleton') }}</title>
+    <x-favicon />
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/plotter-editor.js'])
 </head>
 <body class="bg-linear-to-br from-gray-50 to-gray-100 antialiased">
@@ -18,7 +19,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                         </svg>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-800">SVG Plotter Editor</h1>
+                    <h1 class="text-2xl font-bold text-gray-800">{{ config('app.name', 'Kiro Laravel Skeleton') }}</h1>
                 </div>
                 <div id="viewport-info" class="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg border border-gray-200">
                     <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
